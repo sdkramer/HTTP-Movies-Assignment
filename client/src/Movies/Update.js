@@ -2,25 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
-const initialItem = {
-  name: "",
-  price: "",
-  metascore: "",
-  actors: "",
-  shipping: ""
+const initialMovie = {
+  title: " ",
+  director: " ",
+  metascore: " ",
+  actors: " "
 };
 
 const Update = (props) => {
-  const { push } = useHistory();
-  const [item, setItem] = useState(initialItem);
+  
+  const [movie, setMovie] = useState(initialMovie);
   const { id } = useParams();
   
   useEffect(() => {
     // axios
-    //   .get(`http://localhost:3333/itemById/${id}`)
+    //   .get(`http://localhost:3333/MovieById/${id}`)
     //   .then((res) => {
     //     // res.data
-    //     setItem(res.data);
+    //     setMovie(res.data);
     //   })
     //   .catch((err) => console.log(err));
   }, [id]);
@@ -28,28 +27,29 @@ const Update = (props) => {
   const changeHandler = (ev) => {
     ev.persist();
     let value = ev.target.value;
+    console.log("changeHandler value: ", value);
 
-    setItem({
-      ...item,
+    setMovie({
+      ...movie,
       [ev.target.name]: value
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // make a PUT request to edit the item
-    // axios
-    //   .put(`http://localhost:3333/items/${id}`, item)
-    //   .then((res) => {
-    //     // res.data
-    //     props.setItems(res.data);
-    //     push(`/item-list/${id}`);
-    //   })
-    //   .catch((err) => console.log(err));
+    // make a PUT request to edit the Movie
+    axios
+      .put(`http://localhost:5000/api/movies/${id}`, movie)
+      .then((res) => {
+        console.log(res);
+        // props.setMovies(res.data);
+        // push(`/Movie-list/${id}`);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
-    <div>
+    <div className="movie-card">
       <h2>Update Movie</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -57,7 +57,7 @@ const Update = (props) => {
           name="title"
           onChange={changeHandler}
           placeholder="title"
-          value={item.title}
+          value={movie.title}
         />
         <div className="baseline" />
 
@@ -66,7 +66,7 @@ const Update = (props) => {
           name="director"
           onChange={changeHandler}
           placeholder="Director"
-          value={item.director}
+          value={movie.director}
         />
         <div className="baseline" />
 
@@ -75,7 +75,7 @@ const Update = (props) => {
           name="metascore"
           onChange={changeHandler}
           placeholder="Metascore"
-          value={item.metascore}
+          value={movie.metascore}
         />
         <div className="baseline" />
 
@@ -84,13 +84,13 @@ const Update = (props) => {
           name="actors"
           onChange={changeHandler}
           placeholder="Actors"
-          value={item.actors}
+          value={movie.actors}
         />
         <div className="baseline" />
 
     
 
-        <button className="md-button form-button">Update</button>
+        <button className="update-button">Update</button>
       </form>
     </div>
   );

@@ -28,9 +28,7 @@ const { push } = useHistory();
     return <div>Loading movie information...</div>;
   }
 
-  const updateMovie = () => {
-    console.log('update!');
-  }
+  
 
   return (
     <div className="save-wrapper">
