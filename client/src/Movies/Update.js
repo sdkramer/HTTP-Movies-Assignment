@@ -6,22 +6,24 @@ const initialMovie = {
   title: " ",
   director: " ",
   metascore: " ",
-  actors: " "
+  // stars: [ ]
 };
 
 const Update = (props) => {
+
+  const { push } = useHistory();
   
   const [movie, setMovie] = useState(initialMovie);
   const { id } = useParams();
   
   useEffect(() => {
-    // axios
-    //   .get(`http://localhost:3333/MovieById/${id}`)
-    //   .then((res) => {
-    //     // res.data
-    //     setMovie(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
+    axios
+      .get(`http://localhost:5000/api/movies/${id}`)
+      .then((res) => {
+        console.log("useEffect res: ", res.data);
+        setMovie(res.data);
+      })
+      .catch((err) => console.log(err));
   }, [id]);
 
   const changeHandler = (ev) => {
@@ -37,13 +39,12 @@ const Update = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // make a PUT request to edit the Movie
     axios
       .put(`http://localhost:5000/api/movies/${id}`, movie)
       .then((res) => {
-        console.log(res);
-        // props.setMovies(res.data);
-        // push(`/Movie-list/${id}`);
+        console.log("update put res: ", res.data);
+        // props.setMovieList(...props.movieList, res.data);
+        push(`/`);
       })
       .catch((err) => console.log(err));
   };
@@ -56,7 +57,7 @@ const Update = (props) => {
           type="text"
           name="title"
           onChange={changeHandler}
-          placeholder="title"
+          placeholder="Title"
           value={movie.title}
         />
         <div className="baseline" />
@@ -81,10 +82,10 @@ const Update = (props) => {
 
         <input
           type="text"
-          name="actors"
+          name="stars"
           onChange={changeHandler}
-          placeholder="Actors"
-          value={movie.actors}
+          placeholder="Stars"
+          value={movie.stars}
         />
         <div className="baseline" />
 
