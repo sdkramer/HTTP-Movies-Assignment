@@ -28,6 +28,16 @@ const { push } = useHistory();
     return <div>Loading movie information...</div>;
   }
 
+  const deleteMovie = () => {
+    axios
+    .delete(`http://localhost:5000/api/movies/${movie.id}`)
+    .then((res) => {
+      // console.log("delete res: ", res);
+    push("/")
+  })
+    .catch((err) => console.log(err))
+  }
+
   
 
   return (
@@ -40,6 +50,11 @@ const { push } = useHistory();
 
       <div className="save-button" onClick={saveMovie}>
         Save
+      </div>
+
+      <div className="delete-button" onClick={deleteMovie
+        }>
+        Delete
       </div>
     </div>
   );

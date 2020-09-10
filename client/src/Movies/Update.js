@@ -42,8 +42,8 @@ const Update = (props) => {
     axios
       .put(`http://localhost:5000/api/movies/${id}`, movie)
       .then((res) => {
-        console.log("update put res: ", res.data);
-        // props.setMovieList(...props.movieList, res.data);
+        // console.log("update put res: ", res.data);
+        // setMovie(res.data);
         push(`/`);
       })
       .catch((err) => console.log(err));
