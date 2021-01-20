@@ -32,7 +32,7 @@ const { push } = useHistory();
     axios
     .delete(`http://localhost:5000/api/movies/${movie.id}`)
     .then((res) => {
-      // console.log("delete res: ", res);
+      console.log("delete res: ", res);
     push("/")
   })
     .catch((err) => console.log(err))
@@ -45,7 +45,7 @@ const { push } = useHistory();
       <MovieCard movie={movie} />
 
       <div className="update-button" onClick={() => push(`/update-movie/${params.id}`)}>
-        Update
+        Edit
       </div>
 
       <div className="save-button" onClick={saveMovie}>

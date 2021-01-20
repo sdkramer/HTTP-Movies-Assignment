@@ -30,7 +30,7 @@ const App = () => {
     <>
       <SavedList list={savedList} />
 
-      <Route exact path="/">
+      <Route exact path="/movies">
         <MovieList movies={movieList} />
       </Route>
 

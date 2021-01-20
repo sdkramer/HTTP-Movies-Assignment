@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import MovieList from "./MovieList";
 
 const initialMovie = {
   title: " ",
@@ -10,12 +11,11 @@ const initialMovie = {
 };
 
 const Update = (props) => {
-
   const { push } = useHistory();
-  
+
   const [movie, setMovie] = useState(initialMovie);
   const { id } = useParams();
-  
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
@@ -33,7 +33,7 @@ const Update = (props) => {
 
     setMovie({
       ...movie,
-      [ev.target.name]: value
+      [ev.target.name]: value,
     });
   };
 
@@ -42,9 +42,10 @@ const Update = (props) => {
     axios
       .put(`http://localhost:5000/api/movies/${id}`, movie)
       .then((res) => {
-        // console.log("update put res: ", res.data);
-        // setMovie(res.data);
-        push(`/`);
+        console.log("update put res: ", res.data);
+        push('/movies');
+        props.setMovieList([...props.MovieList, res.data]);
+        
       })
       .catch((err) => console.log(err));
   };
@@ -88,8 +89,6 @@ const Update = (props) => {
           value={movie.stars}
         />
         <div className="baseline" />
-
-    
 
         <button className="update-button">Update</button>
       </form>

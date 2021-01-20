@@ -7,6 +7,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(CORS());
 
+// setInterval(() => {console.log('2 sec')}, 2000)
+
 let movies = [
   {
     id: 0,
