@@ -7,7 +7,7 @@ const initialMovie = {
   title: " ",
   director: " ",
   metascore: null,
-  stars: [ ]
+  stars: ''
 };
 
 
@@ -41,9 +41,12 @@ const Add = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+const formattedMovie = {...movie,
+stars: movie.stars.split(",")}
+
     axios
       .post(`http://localhost:5000/api/movies/`, 
-        movie
+        formattedMovie
       )
       .then((res) => {
         console.log("add post res: ", res.data);

@@ -26,6 +26,22 @@ const App = () => {
     getMovieList();
   }, []);
 
+  // return (
+  //   <>
+  //     <SavedList list={savedList} />
+  //     <Route exact path="/" render={props => <MovieList {...props} movies={movies} />} />
+  //     <Route
+  //       path="/movies/:id"
+  //       render={props => {
+  //         return <Movie {...props} addToSavedList={addToSavedList} getData={getData} />;
+  //       }}
+  //     />
+  //     <Route path="/update-movie/:id" render={props => {
+  //       return <UpdateMovie {...props} movies={movies} setMovies={setMovies} getData={getData} />;
+  //     }} />
+  //   </>
+  // );
+
   return (
     <>
       <SavedList list={savedList} />
